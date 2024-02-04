@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Blog</title>
+    <script type="module" src="/static/htmx.js"></script>
+</head>
+<body>
+    <h1>HTMX Blog</h1>
+
+    <form hx-post="/create" hx-target="#posts">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="Title" required>
+        <br>
+        <label for="content">Content:</label>
+        <textarea id="content" name="Content" rows="4" required></textarea>
+        <br>
+        <button type="submit">Create Post</button>
+    </form>
+
+    <div id="posts">
+        {{range .posts}}
+            <div>
+                <h2><a href="/post/{{.ID}}">{{.Title}}</a></h2>
+                <p>{{.Content}}</p>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>
